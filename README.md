@@ -1,2 +1,2 @@
-# Genesisreyes18-github.io
+# Nature Photography
 Assignment 1
