@@ -2,10 +2,11 @@
 <html>
 <head>
   <style>
+    /* Enable smooth scrolling for the whole document */
     html {
       scroll-behavior: smooth;
     }
-    
+    /* Reset margin, padding, and hide horizontal overflow on both body and html */
     body, html {
       margin: 0;
       padding: 0;
@@ -23,7 +24,7 @@
       opacity: 1;
       transform: translateY(0);
     }
-
+    /* Section styling to create full-height sections centered both vertically and horizontally */
     .section {
       min-height: 100vh;
       scroll-margin-top: 80px;
@@ -33,7 +34,7 @@
       align-items: center;
       text-align: center;
     }
-
+    /* Gallery container styling with horizontal scrolling and snap-to behavior */
     .gallery-container {
       display: flex;
       overflow-x: auto;
@@ -44,10 +45,10 @@
       width: 100%;
     }
 
-    .gallery-container img:hover {
+    .gallery-container img:hover {  /* Hover effect for images in the gallery container */
       opacity: 0.8;
     }
-
+    /* Lightbox styling for displaying images in full-screen view */
     .lightbox {
       display: none;
       position: fixed;
@@ -60,12 +61,12 @@
       justify-content: center;
       align-items: center;
     }
-
+    /* Styling for the image inside the lightbox */
     .lightbox img {
       max-width: 90%;
       max-height: 90%;
     }
-
+    /* Close button in the lightbox */
     .close {
       position: absolute;
       top: 20px;
@@ -74,35 +75,65 @@
       font-size: 40px;
       cursor: pointer;
     }
-
+    /* Wrapper for video elements, centers them horizontally */
     .video-wrapper {
       display: flex;
       justify-content: center;
       width: 100%;
     }
+    /* Contact section */
     .contact-card {
     max-width: 500px;
     margin: auto;
     border-radius: 10px;
     box-shadow: 0 4px 10px white;
     }
-
-    .w3-input {
-    padding: 12px;
-    font-size: 16px;
-    }
-
-    .w3-button {
-    width: 100%;
+     /* Custom button style with gradient, rounded corners, and shadow */
+    .custom-button {
+    background: linear-gradient(135deg, #222, #444); /* Smooth gradient */
+    color: white;
     font-size: 18px;
-    padding: 12px;
-    transition: 0.3s;
+    font-weight: bold;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 50px; /* Fully rounded */
+    cursor: pointer; /* Pointer cursor for interactivity */
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px; /* Space between icon and text */
+    } 
+    body {
+      width: 100%;
+      font-size: 1rem;
+      margin: 0;
+      padding: 0;
     }
 
-    .w3-button:hover {
-    background-color: gray;
+    img, video {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .w3-bar {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .gallery-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .custom-button {
+        width: 100%;
+      }
     }
   </style> 
+
   <title>Nature Photography</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -175,16 +206,14 @@
     <p>Through our lens, we aim to showcase the harmony between the natural and built environments, revealing the hidden beauty in every frame.</p>
   </div>
 
-<!-- Contact Section -->
-<div class="w3-container section w3-center" id="contact">
-  <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16 hidden-title">Contact</h3>
-  <p>Got a question or want to work together? Let's get in touch!</p>
-  <div class="contact-card w3-padding">
-      <button class="w3-button w3-black w3-section w3-round" type="button" onclick="sendEmail()">
-        <i class="fa fa-paper-plane"></i> SEND MESSAGE
-      </button>
+  <!-- Contact Section -->
+  <div class="w3-container section w3-center" id="contact">
+    <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16 hidden-title">Contact</h3>
+    <p>Got a question or want to work together? Let's get in touch!</p>
+    <button class="custom-button" type="button" onclick="sendEmail()">
+      <i class="fa fa-paper-plane"></i> Send Message
+    </button>
   </div>
-</div>
 
 </div> <!-- End page content -->
 
@@ -195,23 +224,24 @@
 
 <!-- JavaScript -->
 <script>
+  // Function to open the lightbox modal and display the selected image
   function openModal(img) {
     document.getElementById("lightbox").style.display = "flex";
     document.getElementById("modalImg").src = img.src;
   }
-
+  // Function to close the lightbox modal
   function closeModal() {
     document.getElementById("lightbox").style.display = "none";
   }
-
+  // Close the lightbox when clicking outside the image
   document.getElementById("lightbox").addEventListener("click", function(event) {
     if (event.target === this) closeModal();
   });
-
+  // Close the lightbox when the Escape key is pressed
   document.addEventListener("keydown", function(event) {
     if (event.key === "Escape") closeModal();
   });
-
+  // Function to reveal elements with a fade-in effect when scrolling
   function revealOnScroll() {
     let titles = document.querySelectorAll(".hidden-title");
     let windowHeight = window.innerHeight;
@@ -219,19 +249,20 @@
     titles.forEach(title => {
       let position = title.getBoundingClientRect().top;
       if (position < windowHeight * 0.8) {
-        title.classList.add("visible");
+        title.classList.add("visible"); // Added the "visible" class to trigger the fade-in effect
       }
     });
   }
-
-  window.addEventListener("scroll", revealOnScroll);
+  // Attach the reveal function to the scroll event
+  window.addEventListener("scroll", revealOnScroll); // Ensure the main title is visible immediately when the page loads
   window.addEventListener("load", () => {
     document.querySelector(".w3-xxlarge").classList.add("visible");
   });
-
+  // Call revealOnScroll() once to apply effects on already visible elements when the page loads
   revealOnScroll();
+  // Function to open the default email client with a pre-filled email address
   function sendEmail() {
-  window.location.href = "mailto:gtr9265@nyu.edu";
+  window.location.href = "mailto:gentamreycas13@gmail.com";
   }
 
 </script>
