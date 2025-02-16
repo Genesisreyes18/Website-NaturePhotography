@@ -104,6 +104,7 @@
     align-items: center;
     gap: 8px; /* Space between icon and text */
     } 
+    /* General body styles */
     body {
       width: 100%;
       font-size: 1rem;
@@ -116,13 +117,13 @@
       height: auto;
       display: block;
     }
-
+    /* Media query for screens with a maximum width of 768px (typically small screens like mobile devices) */
     @media (max-width: 768px) {
-      .w3-bar {
+      .w3-bar {   /* Adjusted the navbar layout for smaller screens (mobile/tablet) by stacking items vertically and centering text */
         flex-direction: column;
         text-align: center;
       }
-      
+        /* Gallery container layout for smaller screens (mobile/tablet) */
       .gallery-container {
         flex-direction: column;
         align-items: center;
