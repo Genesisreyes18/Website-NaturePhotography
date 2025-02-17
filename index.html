@@ -133,6 +133,49 @@
         width: 100%;
       }
     }
+    /* Video Background */
+    .about-section {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white; /* Ensures text is visible */
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .about-section video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    /* Dark Overlay for Contrast */
+    .about-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5); /* Adjust darkness */
+      z-index: 0;
+    }
+
+    .about-content {
+      position: relative;
+      z-index: 2; /* Ensures text is on top */
+      max-width: 800px;
+      padding: 20px;
+    }
+
   </style> 
 
   <title>Nature Photography</title>
@@ -199,13 +242,21 @@
   </div>
 
 
-  <!-- About Section -->
-  <div class="w3-container section w3-center" id="about">
-    <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16 hidden-title">About</h3>
-    <p>This photography website is dedicated to both nature and architectural photography, capturing the beauty of the world around us.</p>
-    <p>We strive to highlight the essence of nature in every corner, whether in vast landscapes or within the intricate details of architectural design.</p>
-    <p>Through our lens, we aim to showcase the harmony between the natural and built environments, revealing the hidden beauty in every frame.</p>
-  </div>
+    <!-- About Section with Video Background -->
+    <div class="about-section" id="about">
+      <video autoplay muted loop>
+        <source src="media/about.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div class="about-overlay"></div>
+      <div class="about-content">
+        <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16 hidden-title">About</h3>
+        <p>This photography website is dedicated to both nature and architectural photography, capturing the beauty of the world around us.</p>
+        <p>We strive to highlight the essence of nature in every corner, whether in vast landscapes or within the intricate details of architectural design.</p>
+        <p>Through our lens, we aim to showcase the harmony between the natural and built environments, revealing the hidden beauty in every frame.</p>
+      </div>
+    </div>
+
 
   <!-- Contact Section -->
   <div class="w3-container section w3-center" id="contact">
@@ -254,6 +305,7 @@
       }
     });
   }
+
   // Attach the reveal function to the scroll event
   window.addEventListener("scroll", revealOnScroll); // Ensure the main title is visible immediately when the page loads
   window.addEventListener("load", () => {
